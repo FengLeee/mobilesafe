@@ -58,32 +58,11 @@ public class SplashActivity extends Activity {
 			case UPDATE_NOT_FOUND:
 				loadHomeUI();
 				break;
+				
 			case FOUND_UPDATE:
-				//弹出对话框提示更新
-				AlertDialog.Builder builder = new AlertDialog.Builder(SplashActivity.this);
-				Bundle bundle = msg.getData();
-				String serverVersion = bundle.getString("serverVersion");
-				String desc = bundle.getString("desc");
-				
-				builder.setTitle("发现新版本:"+serverVersion);
-				builder.setMessage("版本:"+serverVersion+","+desc);
-				
-				builder.setNegativeButton("暂不更新", new OnClickListener() {
-					
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						loadHomeUI();
-					}
-				});
-				
-				builder.setPositiveButton("马上更新", new OnClickListener() {
-					
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						Log.d(TAG,"进入更新界面");
-					}
-				});
-				
+				//弹出对话框提示更新,抽出一个方法
+				Bundle data = msg.getData();
+				updata(data);
 				break;
 			case ERROR:
 				loadHomeUI();
@@ -164,6 +143,33 @@ public class SplashActivity extends Activity {
 
 			};
 		}.start();
+	}
+	protected void updata(Bundle bundle ) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(SplashActivity.this);
+		String serverVersion = bundle.getString("serverVersion");
+		String desc = bundle.getString("desc");
+		
+		builder.setTitle("发现新版本:"+serverVersion);
+		builder.setMessage("版本:"+serverVersion+","+desc);
+		
+		builder.setNegativeButton("暂不更新", new OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				loadHomeUI();
+			}
+		});
+		
+		builder.setPositiveButton("马上更新", new OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				Log.d(TAG,"进入更新界面");
+				//怎么更新,以及显示进度条
+				
+			}
+		});
+		builder.show();
 	}
 	protected void loadHomeUI() {
 				Intent it = new Intent(SplashActivity.this,HomeActivity.class);
