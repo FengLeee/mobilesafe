@@ -21,21 +21,50 @@ public final class R {
         public static final int activity_vertical_margin=0x7f040001;
     }
     public static final class drawable {
-        public static final int heima=0x7f020000;
-        public static final int ic_launcher=0x7f020001;
-        public static final int splash=0x7f020002;
+        public static final int antispam_report_button=0x7f020000;
+        public static final int antispam_report_button_press=0x7f020001;
+        public static final int blue_bkg=0x7f020002;
+        public static final int first_normal=0x7f020003;
+        public static final int first_pressed=0x7f020004;
+        public static final int heima=0x7f020005;
+        public static final int home_selector=0x7f020006;
+        public static final int ic_launcher=0x7f020007;
+        public static final int jcgl=0x7f020008;
+        public static final int last_normal=0x7f020009;
+        public static final int last_pressed=0x7f02000a;
+        public static final int lltj=0x7f02000b;
+        public static final int middle_normal=0x7f02000c;
+        public static final int middle_pressed=0x7f02000d;
+        public static final int off=0x7f02000e;
+        public static final int on=0x7f02000f;
+        public static final int rjgj=0x7f020010;
+        public static final int setting=0x7f020011;
+        public static final int setting_bottom_selector=0x7f020012;
+        public static final int setting_mid_selector=0x7f020013;
+        public static final int setting_top_selector=0x7f020014;
+        public static final int sjfd=0x7f020015;
+        public static final int sjsd=0x7f020016;
+        public static final int splash=0x7f020017;
+        public static final int srlj=0x7f020018;
+        public static final int szzx=0x7f020019;
+        public static final int xtjs=0x7f02001a;
     }
     public static final class id {
-        public static final int action_settings=0x7f080004;
+        public static final int action_settings=0x7f080008;
         public static final int gv=0x7f080002;
         public static final int iv_heima=0x7f080000;
+        public static final int iv_items=0x7f080005;
+        public static final int iv_update=0x7f080003;
+        public static final int tv_items_title=0x7f080006;
+        public static final int tv_items_title1=0x7f080007;
         public static final int tv_title=0x7f080001;
-        public static final int tv_version=0x7f080003;
+        public static final int tv_version=0x7f080004;
     }
     public static final class layout {
         public static final int activity_home=0x7f030000;
-        public static final int activity_splash=0x7f030001;
-        public static final int items=0x7f030002;
+        public static final int activity_setting=0x7f030001;
+        public static final int activity_splash=0x7f030002;
+        public static final int items=0x7f030003;
     }
     public static final class menu {
         public static final int main=0x7f070000;
@@ -70,10 +99,7 @@ public final class R {
          */
         public static final int AppBaseTheme=0x7f060000;
         /**  Application theme. 
- All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f060001;
-        public static final int HomeTheme=0x7f060003;
-        public static final int SplashTheme=0x7f060002;
     }
 }
