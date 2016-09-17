@@ -21,6 +21,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -48,37 +49,49 @@ public class SplashActivity extends Activity {
 			tv_version.setText("版本解析错误");
 			e.printStackTrace();
 		}
-		checkVersion();
+		SharedPreferences sp = getSharedPreferences("update", MODE_PRIVATE);
+		boolean b = sp.getBoolean("status", true);
+		if (b) {
+			checkVersion();
+		} else {
+			new Thread() {
+				public void run() {
+					SystemClock.sleep(2000);
+					loadHomeUI();
+				};
+			}.start();
+
+		}
 
 	}
-	
+
 	private Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
 			switch (msg.what) {
 			case UPDATE_NOT_FOUND:
 				loadHomeUI();
 				break;
-				
+
 			case FOUND_UPDATE:
-				//弹出对话框提示更新,抽出一个方法
+				// 弹出对话框提示更新,抽出一个方法
 				Bundle data = msg.getData();
 				updata(data);
 				break;
 			case ERROR:
 				loadHomeUI();
 				String err = (String) msg.obj;
-				Toast.makeText(SplashActivity.this,err, 0).show();
+				Toast.makeText(SplashActivity.this, err, 0).show();
 				break;
 
 			default:
 				break;
 			}
-			
+
 		};
 	};
-	
+
 	private void checkVersion() {
-		
+
 		final String ip = getResources().getString(R.string.ip);
 		final Message msg = Message.obtain();
 		final long dt = System.currentTimeMillis();
@@ -96,12 +109,13 @@ public class SplashActivity extends Activity {
 						String str = InputStreamTostring.getString(in);
 						JSONObject json = new JSONObject(str);
 						String serverVersion = json.getString("version");
-						if (PackageInformation.getVersion(SplashActivity.this).equals(serverVersion) ) {
-							
-							msg.what =  UPDATE_NOT_FOUND;
-							
-						}else {
-							msg.what =  FOUND_UPDATE;
+						if (PackageInformation.getVersion(SplashActivity.this)
+								.equals(serverVersion)) {
+
+							msg.what = UPDATE_NOT_FOUND;
+
+						} else {
+							msg.what = FOUND_UPDATE;
 							Bundle data = new Bundle();
 							String desc = json.getString("desc");
 							data.putString("serverVersion", serverVersion);
@@ -110,33 +124,33 @@ public class SplashActivity extends Activity {
 						}
 
 					} else {
-						msg.what =  ERROR;
+						msg.what = ERROR;
 						msg.obj = "网络连接错误";
 					}
 
 				} catch (MalformedURLException e) {
-					msg.what =  ERROR;
+					msg.what = ERROR;
 					msg.obj = "网络连接错误1";
 					e.printStackTrace();
 				} catch (IOException e) {
-					msg.what =  ERROR;
+					msg.what = ERROR;
 					msg.obj = "网络连接错误2";
 					e.printStackTrace();
 				} catch (JSONException e) {
-					msg.what =  ERROR;
+					msg.what = ERROR;
 					msg.obj = "网络连接错误3";
 					e.printStackTrace();
 				} catch (NameNotFoundException e) {
-					msg.what =  ERROR;
+					msg.what = ERROR;
 					msg.obj = "网络连接错误4";
 					e.printStackTrace();
 				} finally {
 					long ct = System.currentTimeMillis();
 					long t = ct - dt;
-					if(t > 2000) {
+					if (t > 2000) {
 						handler.sendMessage(msg);
-					}else {
-						SystemClock.sleep(2000-t);
+					} else {
+						SystemClock.sleep(2000 - t);
 						handler.sendMessage(msg);
 					}
 				}
@@ -144,39 +158,39 @@ public class SplashActivity extends Activity {
 			};
 		}.start();
 	}
-	protected void updata(Bundle bundle ) {
-		AlertDialog.Builder builder = new AlertDialog.Builder(SplashActivity.this);
+
+	protected void updata(Bundle bundle) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(
+				SplashActivity.this);
 		String serverVersion = bundle.getString("serverVersion");
 		String desc = bundle.getString("desc");
-		
-		builder.setTitle("发现新版本:"+serverVersion);
-		builder.setMessage("版本:"+serverVersion+","+desc);
-		
+
+		builder.setTitle("发现新版本:" + serverVersion);
+		builder.setMessage("版本:" + serverVersion + "," + desc);
+
 		builder.setNegativeButton("暂不更新", new OnClickListener() {
-			
+
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				loadHomeUI();
 			}
 		});
-		
+
 		builder.setPositiveButton("马上更新", new OnClickListener() {
-			
+
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				Log.d(TAG,"进入更新界面");
-				//怎么更新,以及显示进度条
-				
+				Log.d(TAG, "进入更新界面");
+				// 怎么更新,以及显示进度条
+
 			}
 		});
 		builder.show();
 	}
+
 	protected void loadHomeUI() {
-				Intent it = new Intent(SplashActivity.this,HomeActivity.class);
-				startActivity(it);
-				finish();
-		}
+		Intent it = new Intent(SplashActivity.this, HomeActivity.class);
+		startActivity(it);
+		finish();
 	}
-	
-	
-	
+}
