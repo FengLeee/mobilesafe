@@ -5,12 +5,20 @@ import com.yiya.mobilesafe.R;
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,12 +26,14 @@ import android.widget.TextView;
 public class HomeActivity extends Activity {
 	private static final String TAG = "HomeActivity";
 	GridView gv;
-
+	SharedPreferences sp;
+	String pw;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home);
 		ImageView iv_heima =	(ImageView) findViewById(R.id.iv_heima);
+		sp = getSharedPreferences("pw", MODE_PRIVATE);
 		ObjectAnimator animator = ObjectAnimator.ofFloat(iv_heima, "rotationY", 0,359);
 		//实现动画效果
 		animator.setRepeatCount(ObjectAnimator.INFINITE);
@@ -33,10 +43,71 @@ public class HomeActivity extends Activity {
 		// 在这里要显示8控件
 		gv = (GridView) findViewById(R.id.gv);
 		showHome();
+		gv.setOnItemClickListener(new OnItemClickListener() {
+	
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				Log.d(TAG, "position==="+position);
+				switch (position) {
+				case 0:
+					//进入防盗设置页面
+					pw = sp.getString("pw", "");
+					confirmPassWord();
+					if(!pw.isEmpty()){
+						//进入输入密码框
+						
+						
+						
+						boolean resoult = confirmPassWord();
+						if(resoult) {
+							//密码正确,进入界面
+						}else {
+							//密码输入为空提示错误
+						}
+						
+					}else {
+						//进入设置密码框
+						setPassWord();
+					}
+					
+					
+					
+					
+					
+					break;
+
+				default:
+					break;
+				}
+				
+			}
+		});
+		
+		
+		
 	}
 	
 	
 	
+	protected void setPassWord() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	protected boolean confirmPassWord() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		View v = View.inflate(this, R.layout.confirm_pw_items, null);
+		builder.setView(v);
+		builder.show();
+		return false;
+		
+	}
+
+
+
 	public void setting(View v) {
 		Intent setting = new Intent(this,SettingActivity.class);
 		startActivity(setting);
