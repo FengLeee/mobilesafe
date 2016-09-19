@@ -182,7 +182,9 @@ public class SplashActivity extends Activity {
 			public void onClick(DialogInterface dialog, int which) {
 				Log.d(TAG, "进入更新界面");
 				// 怎么更新,以及显示进度条
-
+				Intent it = new Intent();
+				it.setAction("android.intent.action.VIEW");
+				//it.setDataAndType(data, "application/vnd.android.package-archive");
 			}
 		});
 		builder.show();
