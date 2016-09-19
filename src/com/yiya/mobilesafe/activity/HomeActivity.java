@@ -6,17 +6,9 @@ import com.yiya.mobilesafe.activity.lostfound.OneActivity;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.AlertDialog;
-<<<<<<< HEAD
-import android.app.AlertDialog.Builder;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
-import android.content.Intent;
-import android.content.SharedPreferences;
-=======
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
->>>>>>> c78855d4ec2f24fed637d85bf1649232ef7b7942
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,10 +17,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
-<<<<<<< HEAD
-=======
 import android.widget.Button;
->>>>>>> c78855d4ec2f24fed637d85bf1649232ef7b7942
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -38,23 +27,12 @@ import android.widget.Toast;
 public class HomeActivity extends Activity {
 	private static final String TAG = "HomeActivity";
 	GridView gv;
-<<<<<<< HEAD
-	SharedPreferences sp;
-	String pw;
-=======
 	private SharedPreferences sp;
 
->>>>>>> c78855d4ec2f24fed637d85bf1649232ef7b7942
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home);
-<<<<<<< HEAD
-		ImageView iv_heima =	(ImageView) findViewById(R.id.iv_heima);
-		sp = getSharedPreferences("pw", MODE_PRIVATE);
-		ObjectAnimator animator = ObjectAnimator.ofFloat(iv_heima, "rotationY", 0,359);
-		//实现动画效果
-=======
 		// 获取SP
 		sp = getSharedPreferences("pw", MODE_PRIVATE);
 		 final String passWord = sp.getString("pw", "");
@@ -62,7 +40,6 @@ public class HomeActivity extends Activity {
 		ObjectAnimator animator = ObjectAnimator.ofFloat(iv_heima, "rotationY",
 				0, 359);
 		// 实现动画效果
->>>>>>> c78855d4ec2f24fed637d85bf1649232ef7b7942
 		animator.setRepeatCount(ObjectAnimator.INFINITE);
 		animator.setRepeatMode(ObjectAnimator.RESTART);
 		animator.setDuration(2000);
@@ -70,40 +47,6 @@ public class HomeActivity extends Activity {
 		// 在这里要显示8控件
 		gv = (GridView) findViewById(R.id.gv);
 		showHome();
-<<<<<<< HEAD
-		gv.setOnItemClickListener(new OnItemClickListener() {
-	
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				Log.d(TAG, "position==="+position);
-				switch (position) {
-				case 0:
-					//进入防盗设置页面
-					pw = sp.getString("pw", "");
-					confirmPassWord();
-					if(!pw.isEmpty()){
-						//进入输入密码框
-						
-						
-						
-						boolean resoult = confirmPassWord();
-						if(resoult) {
-							//密码正确,进入界面
-						}else {
-							//密码输入为空提示错误
-						}
-						
-					}else {
-						//进入设置密码框
-						setPassWord();
-					}
-					
-					
-					
-					
-					
-=======
 		// 设置gridvie监听器
 		gv.setOnItemClickListener(new OnItemClickListener() {
 
@@ -145,15 +88,11 @@ public class HomeActivity extends Activity {
 					break;
 				case 8:
 
->>>>>>> c78855d4ec2f24fed637d85bf1649232ef7b7942
 					break;
 
 				default:
 					break;
 				}
-<<<<<<< HEAD
-				
-=======
 			}
 		});
 	}
@@ -199,35 +138,10 @@ public class HomeActivity extends Activity {
 								.show();
 					}
 				}
->>>>>>> c78855d4ec2f24fed637d85bf1649232ef7b7942
 			}
 		});
 		
 		
-<<<<<<< HEAD
-		
-	}
-	
-	
-	
-	protected void setPassWord() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
-	protected boolean confirmPassWord() {
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		View v = View.inflate(this, R.layout.confirm_pw_items, null);
-		builder.setView(v);
-		builder.show();
-		return false;
-		
-	}
-
-
-=======
 		cancer.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -297,7 +211,6 @@ public class HomeActivity extends Activity {
 		});
 
 	}
->>>>>>> c78855d4ec2f24fed637d85bf1649232ef7b7942
 
 	public void setting(View v) {
 		Intent setting = new Intent(this, SettingActivity.class);
