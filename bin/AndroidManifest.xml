@@ -27,6 +27,8 @@
         <activity android:name="com.yiya.mobilesafe.activity.HomeActivity" >
         </activity>
         <activity android:name="com.yiya.mobilesafe.activity.SettingActivity"></activity>
+        <activity android:name="com.yiya.mobilesafe.activity.lostfound.OneActivity"></activity>
+        <activity android:name="com.yiya.mobilesafe.activity.lostfound.TwoActivity"></activity>
     </application>
 
 </manifest>

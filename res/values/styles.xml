@@ -17,5 +17,21 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
         <item name="android:windowNoTitle">true</item>
     </style>
-
+	<!--
+	   android:gravity="center_vertical"
+        android:drawableLeft="@drawable/dialog_title_default_icon"
+        android:textSize="12sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+	
+	  -->
+    <style name="items">
+		<item name="android:gravity">center_vertical</item>        
+		<item name="android:drawableLeft">@drawable/dialog_title_default_icon</item>        
+		<item name="android:textSize">12sp</item>        
+		<item name="android:layout_width">wrap_content</item>        
+		<item name="android:layout_height">wrap_content</item>        
+		<item name="android:layout_centerVertical">true</item>        
+    </style>
 </resources>

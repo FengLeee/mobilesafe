@@ -35,8 +35,7 @@ public class HomeActivity extends Activity {
 		setContentView(R.layout.activity_home);
 		// 获取SP
 		sp = getSharedPreferences("pw", MODE_PRIVATE);
-		 final String passWord = sp.getString("pw", "");
-		ImageView iv_heima = (ImageView) findViewById(R.id.iv_heima);
+		ImageView iv_heima = (ImageView) findViewById(R.id.iv_heima); 
 		ObjectAnimator animator = ObjectAnimator.ofFloat(iv_heima, "rotationY",
 				0, 359);
 		// 实现动画效果
@@ -48,13 +47,17 @@ public class HomeActivity extends Activity {
 		gv = (GridView) findViewById(R.id.gv);
 		showHome();
 		// 设置gridvie监听器
-		gv.setOnItemClickListener(new OnItemClickListener() {
+		setOnItemClickListener();
+	}
 
+	private void setOnItemClickListener() {
+		gv.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				switch (position) {
 				case 0:
+					String passWord = sp.getString("pw", "");
 					// 进入防盗相关页面,判断是否已经设置密码
 					if ("".equals(passWord)) {
 						// 密码为空,进入设置密码界面
@@ -98,23 +101,27 @@ public class HomeActivity extends Activity {
 	}
 
 	protected void confirmPw() {
+		
+		//设置dialog
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		View view = View.inflate(this, R.layout.activity_confirmpw, null);
 		builder.setView(view);
 		final AlertDialog dialog = builder.show();
 		
+		
+		//获取控件
 		Button confirm = (Button) view.findViewById(R.id.confirm);
 		Button cancer = (Button) view.findViewById(R.id.cancer);
 
 		final EditText et_pw = (EditText) view.findViewById(R.id.et_pw);
-		 
+		 //确认按钮
 		confirm.setOnClickListener(new OnClickListener() {
-
 			@Override
 			public void onClick(View v) {
 				// 判断密码是否正确
 				String cpw = et_pw.getText().toString();
 				String pw = sp.getString("pw", "");
+				
 				if (cpw.isEmpty()) {
 					Toast.makeText(getApplicationContext(), "密码不能为空,请重新输入", 0)
 							.show();
@@ -122,6 +129,7 @@ public class HomeActivity extends Activity {
 					if (cpw.equals(pw)) {
 						// 密码正确.进入界面,判断是否已经设置防盗,设置了直接进入最后界面,没设置重头开始设置
 						Log.d(TAG, "进入界面设置");
+						
 						sp = getSharedPreferences("config", MODE_PRIVATE);
 						boolean config = sp.getBoolean("config", false);
 						if(config) {
@@ -129,9 +137,9 @@ public class HomeActivity extends Activity {
 							loadResoult();
 						}else {
 							//进入设置
+							dialog.dismiss();
 							lostFoundSetting();
 						}
-						
 						
 					} else {
 						Toast.makeText(getApplicationContext(), "密码错误,请重新输入", 0)
@@ -155,6 +163,7 @@ public class HomeActivity extends Activity {
 	protected void lostFoundSetting() {
 		//进入第一个防盗页面
 		Intent it = new Intent(this, OneActivity.class);
+		startActivity(it);
 	}
 
 	protected void loadResoult() {
@@ -191,9 +200,11 @@ public class HomeActivity extends Activity {
 						Editor edit = sp.edit();
 						edit.putString("pw", spw);
 						edit.commit();
+						
 						Toast.makeText(getApplicationContext(), "密码设置成功", 0)
 								.show();
 						// 进入确认密码界面
+						dialog.dismiss();
 						confirmPw();
 					}
 				} else {
@@ -266,13 +277,11 @@ public class HomeActivity extends Activity {
 
 		@Override
 		public Object getItem(int position) {
-			// TODO Auto-generated method stub
 			return null;
 		}
 
 		@Override
 		public long getItemId(int position) {
-			// TODO Auto-generated method stub
 			return 0;
 		}
 
