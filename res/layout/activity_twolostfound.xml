@@ -27,22 +27,25 @@
 
     <!-- gravity  组件的子组件 -->
 
-    <RelativeLayout
+   	<RelativeLayout
+		android:onClick="lockChange"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:background="@drawable/nextbutton_selector"
+        android:clickable="true" >
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="点击绑定/解绑SIM卡" />
-        <ImageView 
-            android:layout_alignParentRight="true"
+
+        <ImageView
+            android:id="@+id/iv_lock"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/list_button_lock_pressed"
-            />
-        
+            android:layout_alignParentRight="true"
+            android:src="@drawable/list_button_lock_pressed" />
     </RelativeLayout>
 
     <LinearLayout
@@ -55,12 +58,12 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/presence_online" />
+            android:src="@drawable/presence_invisible" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/presence_invisible" />
+            android:src="@drawable/presence_online" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -81,7 +84,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:src="@drawable/setup1" />
+            android:src="@drawable/bind" />
 
         <Button
             android:layout_width="wrap_content"
@@ -90,7 +93,7 @@
             android:layout_alignParentRight="true"
             android:background="@drawable/nextbutton_selector"
             android:drawableRight="@drawable/next"
-            android:onClick="next1"
+            android:onClick="next"
             android:text="下一步" />
 
         <Button
@@ -100,7 +103,7 @@
             android:background="@drawable/nextbutton_selector"
             android:drawableLeft="@drawable/previous"
             android:onClick="cancer"
-            android:text="返回主界面" />
+            android:text="返回上一步" />
     </RelativeLayout>
 
 </LinearLayout>
