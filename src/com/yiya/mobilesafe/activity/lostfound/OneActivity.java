@@ -19,7 +19,7 @@ public class OneActivity extends Activity {
 	public void cancer(View v) {
 		finish();
 	}
-	public void next1(View v) {
+	public void next(View v) {
 		Intent it = new Intent(this, TwoActivity.class);
 		startActivity(it);
 	}

@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:background="#7bc7ef"
         android:padding="8dp"
-        android:text="1.欢迎使用手机防盗"
+        android:text="3.设置安全号码"
         android:textColor="#ffffff"
         android:textSize="18sp" />
 
@@ -17,25 +17,24 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:padding="5dp"
-        android:text="您的手机防盗卫士:" />
-
-    <!-- gravity  组件的子组件 -->
+        android:text="SIM卡如果发生变化:" />
 
     <TextView
-        style="@style/items"
-        android:text="SIM卡变更报警" />
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:text="报警短信就会发送给安全号码" />
 
-    <TextView
-        style="@style/items"
-        android:text="GPS追踪" />
+    <EditText
+        android:id="@+id/et_phone"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="请输入安全号码" />
 
-    <TextView
-        style="@style/items"
-        android:text="远程锁屏" />
-
-    <TextView
-        style="@style/items"
-        android:text="远程销毁数据" />
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="选择安全联系人" />
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -47,17 +46,17 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:src="@drawable/presence_invisible" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/presence_invisible" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:src="@drawable/presence_online" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/presence_invisible" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/presence_invisible" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -73,25 +72,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:src="@drawable/setup1" />
+            android:src="@drawable/phone" />
 
         <Button
-            android:onClick="next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:background="@drawable/nextbutton_selector"
             android:drawableRight="@drawable/next"
+            android:onClick="next"
             android:text="下一步" />
+
         <Button
-            android:onClick="cancer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:background="@drawable/nextbutton_selector"
-			android:drawableLeft="@drawable/previous"            
-            android:text="返回主界面" />
+            android:drawableLeft="@drawable/previous"
+            android:onClick="cancer"
+            android:text="返回上一步" />
     </RelativeLayout>
 
 </LinearLayout>

@@ -49,7 +49,7 @@ public class SplashActivity extends Activity {
 			tv_version.setText("版本解析错误");
 			e.printStackTrace();
 		}
-		SharedPreferences sp = getSharedPreferences("update", MODE_PRIVATE);
+		SharedPreferences sp = getSharedPreferences("config", MODE_PRIVATE);
 		boolean b = sp.getBoolean("status", true);
 		if (b) {
 			checkVersion();

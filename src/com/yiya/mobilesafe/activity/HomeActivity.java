@@ -34,7 +34,7 @@ public class HomeActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home);
 		// 获取SP
-		sp = getSharedPreferences("pw", MODE_PRIVATE);
+		sp = getSharedPreferences("config", MODE_PRIVATE);
 		ImageView iv_heima = (ImageView) findViewById(R.id.iv_heima); 
 		ObjectAnimator animator = ObjectAnimator.ofFloat(iv_heima, "rotationY",
 				0, 359);
@@ -129,8 +129,6 @@ public class HomeActivity extends Activity {
 					if (cpw.equals(pw)) {
 						// 密码正确.进入界面,判断是否已经设置防盗,设置了直接进入最后界面,没设置重头开始设置
 						Log.d(TAG, "进入界面设置");
-						
-						sp = getSharedPreferences("config", MODE_PRIVATE);
 						boolean config = sp.getBoolean("config", false);
 						if(config) {
 							//进入最后

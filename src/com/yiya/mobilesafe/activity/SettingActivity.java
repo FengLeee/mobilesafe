@@ -21,7 +21,7 @@ public class SettingActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_setting);
 		iv_update = (SwitchImageView) findViewById(R.id.iv_update);
-		sp = getSharedPreferences("update", MODE_PRIVATE);
+		sp = getSharedPreferences("config", MODE_PRIVATE);
 		
 		b = sp.getBoolean("status", true);
 		Log.d(TAG, "b==="+b);

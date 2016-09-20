@@ -7,7 +7,6 @@ import java.io.InputStream;
 public class InputStreamTostring {
 
 	public static String getString(InputStream in) throws IOException {
-		//ÄÚ´æÊä³öÁ÷
 		ByteArrayOutputStream bao = new ByteArrayOutputStream();
 		int len = 0;
 		byte[] arr = new byte[1024];
