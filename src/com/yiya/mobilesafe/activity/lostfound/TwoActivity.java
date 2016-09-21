@@ -60,6 +60,8 @@ public class TwoActivity extends Activity {
 	}
 
 	public void cancer(View v) {
+		Intent it = new Intent(this, OneActivity.class);
+		startActivity(it);
 		finish();
 	}
 
@@ -69,6 +71,7 @@ public class TwoActivity extends Activity {
 		if (sim) {
 			Intent it = new Intent(this, ThreeActivity.class);
 			startActivity(it);
+			finish();
 		} else {
 			Toast.makeText(this, "必须要设置SIM卡号才能正常使用手机防盗功能", 0).show();
 			return;

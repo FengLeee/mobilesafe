@@ -5,6 +5,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 
+
 public class PackageInformation {
 
 	public static String getVersion(Context context) throws NameNotFoundException {

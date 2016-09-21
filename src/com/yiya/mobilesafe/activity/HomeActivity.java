@@ -1,6 +1,7 @@
 package com.yiya.mobilesafe.activity;
 
 import com.yiya.mobilesafe.R;
+import com.yiya.mobilesafe.activity.lostfound.LastActivity;
 import com.yiya.mobilesafe.activity.lostfound.OneActivity;
 
 import android.animation.ObjectAnimator;
@@ -132,6 +133,7 @@ public class HomeActivity extends Activity {
 						boolean config = sp.getBoolean("config", false);
 						if(config) {
 							//进入最后
+							dialog.dismiss();
 							loadResoult();
 						}else {
 							//进入设置
@@ -165,7 +167,8 @@ public class HomeActivity extends Activity {
 	}
 
 	protected void loadResoult() {
-		//进入最后一个防盗页面		
+		Intent it = new Intent(this, LastActivity.class);
+		startActivity(it);
 	}
 
 	protected void setPw() {

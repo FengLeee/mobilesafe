@@ -65,36 +65,38 @@ public final class R {
         public static final int xtjs=0x7f020029;
     }
     public static final class id {
-        public static final int action_settings=0x7f08000f;
+        public static final int action_settings=0x7f080010;
         public static final int cancer=0x7f080001;
         public static final int ck=0x7f080003;
         public static final int confirm=0x7f080002;
-        public static final int et_phone=0x7f08000a;
+        public static final int et_phone=0x7f08000b;
         public static final int et_pw=0x7f080000;
-        public static final int et_pw_confirm=0x7f080007;
+        public static final int et_pw_confirm=0x7f080008;
         public static final int gv=0x7f080006;
         public static final int iv_heima=0x7f080004;
-        public static final int iv_items=0x7f08000c;
-        public static final int iv_lock=0x7f08000b;
-        public static final int iv_update=0x7f080008;
-        public static final int tv_items_title=0x7f08000d;
-        public static final int tv_items_title1=0x7f08000e;
+        public static final int iv_items=0x7f08000d;
+        public static final int iv_lock=0x7f08000c;
+        public static final int iv_update=0x7f080009;
+        public static final int tv_items_title=0x7f08000e;
+        public static final int tv_items_title1=0x7f08000f;
+        public static final int tv_number=0x7f080007;
         public static final int tv_title=0x7f080005;
-        public static final int tv_version=0x7f080009;
+        public static final int tv_version=0x7f08000a;
     }
     public static final class layout {
         public static final int activity_confirmpw=0x7f030000;
         public static final int activity_fourlostfound=0x7f030001;
         public static final int activity_home=0x7f030002;
-        public static final int activity_lostfound=0x7f030003;
-        public static final int activity_onelostfound=0x7f030004;
-        public static final int activity_setpw=0x7f030005;
-        public static final int activity_setting=0x7f030006;
-        public static final int activity_splash=0x7f030007;
-        public static final int activity_threelostfound=0x7f030008;
-        public static final int activity_twolostfound=0x7f030009;
-        public static final int confirm_pw_items=0x7f03000a;
-        public static final int items=0x7f03000b;
+        public static final int activity_lastlostfound=0x7f030003;
+        public static final int activity_lostfound=0x7f030004;
+        public static final int activity_onelostfound=0x7f030005;
+        public static final int activity_setpw=0x7f030006;
+        public static final int activity_setting=0x7f030007;
+        public static final int activity_splash=0x7f030008;
+        public static final int activity_threelostfound=0x7f030009;
+        public static final int activity_twolostfound=0x7f03000a;
+        public static final int confirm_pw_items=0x7f03000b;
+        public static final int items=0x7f03000c;
     }
     public static final class menu {
         public static final int main=0x7f070000;

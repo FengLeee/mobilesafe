@@ -3,6 +3,7 @@ package com.yiya.mobilesafe.activity.lostfound;
 import com.yiya.mobilesafe.R;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -27,11 +28,12 @@ public class FourActivity extends Activity {
 		public void next (View v) {
 			boolean checked = ck.isChecked();
 			if(checked) {
-				//start the last activity
 				sp.edit().putBoolean("check", true).commit();
 				Toast.makeText(this, "状态保存成功", 0).show();
-				
-				
+				//start the last activity
+				Intent it = new Intent(this, LastActivity.class);
+				startActivity(it);
+				finish();
 			}else {
 				//toast 
 				sp.edit().putBoolean("check", false).commit();
@@ -40,6 +42,8 @@ public class FourActivity extends Activity {
 			}
 		}
 		public void cancer(View v) {
+			Intent it = new Intent(this, ThreeActivity.class);
+			startActivity(it);
 			finish();
 		}
 	

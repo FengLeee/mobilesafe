@@ -22,5 +22,6 @@ public class OneActivity extends Activity {
 	public void next(View v) {
 		Intent it = new Intent(this, TwoActivity.class);
 		startActivity(it);
+		finish();
 	}
 }

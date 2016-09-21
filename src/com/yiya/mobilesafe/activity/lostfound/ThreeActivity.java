@@ -41,10 +41,13 @@ public class ThreeActivity extends Activity {
 			// start new activity
 			Intent it = new Intent(this, FourActivity.class);
 			startActivity(it);
+			finish();
 		}
 	}
 
 	public void cancer(View v) {
+		Intent it = new Intent(this, TwoActivity.class);
+		startActivity(it);
 		finish();
 	}
 }
