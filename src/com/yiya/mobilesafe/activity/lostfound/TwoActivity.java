@@ -63,6 +63,7 @@ public class TwoActivity extends Activity {
 		Intent it = new Intent(this, OneActivity.class);
 		startActivity(it);
 		finish();
+		overridePendingTransition(R.anim.previous_in, R.anim.previous_exit);
 	}
 
 	public void next(View v) {
@@ -72,6 +73,7 @@ public class TwoActivity extends Activity {
 			Intent it = new Intent(this, ThreeActivity.class);
 			startActivity(it);
 			finish();
+			overridePendingTransition(R.anim.next_in, R.anim.next_exit);
 		} else {
 			Toast.makeText(this, "必须要设置SIM卡号才能正常使用手机防盗功能", 0).show();
 			return;

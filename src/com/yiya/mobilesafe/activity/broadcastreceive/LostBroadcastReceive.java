@@ -12,19 +12,6 @@ public class LostBroadcastReceive extends BroadcastReceiver {
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		Log.d(TAG, intent.getAction());
-		Log.d(TAG, intent.getAction());
-		Log.d(TAG, intent.getAction());
-		Log.d(TAG, intent.getAction());
-		Log.d(TAG, intent.getAction());
-		Log.d(TAG, intent.getAction());
-		Log.d(TAG, intent.getAction());
-		Log.d(TAG, intent.getAction());
-		Log.d(TAG, intent.getAction());
-		Log.d(TAG, intent.getAction());
-		Log.d(TAG, intent.getAction());
-		Log.d(TAG, intent.getAction());
-		Log.d(TAG, intent.getAction());
 		
 	}
-
 }

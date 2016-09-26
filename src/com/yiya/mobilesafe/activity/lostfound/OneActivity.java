@@ -23,5 +23,6 @@ public class OneActivity extends Activity {
 		Intent it = new Intent(this, TwoActivity.class);
 		startActivity(it);
 		finish();
+		overridePendingTransition(R.anim.next_in, R.anim.next_exit);
 	}
 }

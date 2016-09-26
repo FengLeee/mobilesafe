@@ -34,6 +34,7 @@ public class FourActivity extends Activity {
 				Intent it = new Intent(this, LastActivity.class);
 				startActivity(it);
 				finish();
+				overridePendingTransition(R.anim.next_in, R.anim.next_exit);
 			}else {
 				//toast 
 				sp.edit().putBoolean("check", false).commit();
@@ -45,6 +46,7 @@ public class FourActivity extends Activity {
 			Intent it = new Intent(this, ThreeActivity.class);
 			startActivity(it);
 			finish();
+			overridePendingTransition(R.anim.previous_in, R.anim.previous_exit);
 		}
 	
 }

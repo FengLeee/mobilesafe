@@ -42,6 +42,7 @@ public class ThreeActivity extends Activity {
 			Intent it = new Intent(this, FourActivity.class);
 			startActivity(it);
 			finish();
+			overridePendingTransition(R.anim.next_in, R.anim.next_exit);
 		}
 	}
 
@@ -49,5 +50,6 @@ public class ThreeActivity extends Activity {
 		Intent it = new Intent(this, TwoActivity.class);
 		startActivity(it);
 		finish();
+		overridePendingTransition(R.anim.previous_in, R.anim.previous_exit);
 	}
 }
