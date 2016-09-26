@@ -15,6 +15,15 @@ public class LostBroadcastReceive extends BroadcastReceiver {
 		Log.d(TAG, intent.getAction());
 		Log.d(TAG, intent.getAction());
 		Log.d(TAG, intent.getAction());
+		Log.d(TAG, intent.getAction());
+		Log.d(TAG, intent.getAction());
+		Log.d(TAG, intent.getAction());
+		Log.d(TAG, intent.getAction());
+		Log.d(TAG, intent.getAction());
+		Log.d(TAG, intent.getAction());
+		Log.d(TAG, intent.getAction());
+		Log.d(TAG, intent.getAction());
+		Log.d(TAG, intent.getAction());
 		
 	}
 
