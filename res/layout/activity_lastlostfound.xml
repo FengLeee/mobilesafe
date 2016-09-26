@@ -51,9 +51,9 @@
     </RelativeLayout>
 
     <TextView
-        
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/reset_selector"
         android:clickable="true"
         android:onClick="reset"
         android:padding="5dp"
@@ -85,5 +85,18 @@
         style="@style/items"
         android:padding="2dp"
         android:text="远程锁屏:#*lockscreen*#" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:background="@drawable/reset_selector"
+            android:onClick="home"
+            android:layout_alignParentBottom="true"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="确认并返回主界面" />
+    </RelativeLayout>
 
 </LinearLayout>

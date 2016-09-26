@@ -5,6 +5,7 @@ import com.yiya.mobilesafe.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.GestureDetector;
 import android.view.View;
 
 public class OneActivity extends Activity {
@@ -13,7 +14,8 @@ public class OneActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_onelostfound);
 		
-		//设置两个button的方法
+		//设置两个button的方法,add gesture
+		
 	}
 	
 	public void cancer(View v) {

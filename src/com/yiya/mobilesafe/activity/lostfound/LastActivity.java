@@ -1,6 +1,7 @@
 package com.yiya.mobilesafe.activity.lostfound;
 
 import com.yiya.mobilesafe.R;
+import com.yiya.mobilesafe.activity.HomeActivity;
 import com.yiya.mobilesafe.activity.broadcastreceive.LostBroadcastReceive;
 
 import android.app.Activity;
@@ -30,6 +31,11 @@ public class LastActivity extends Activity {
 		Intent it = new Intent(this, OneActivity.class);
 		sp = getSharedPreferences("config", MODE_PRIVATE);
 		sp.edit().putBoolean("config", false).commit();
+		startActivity(it);
+		finish();
+	}
+	public void home(View v) {
+		Intent it = new Intent(this, HomeActivity.class);
 		startActivity(it);
 		finish();
 	}
