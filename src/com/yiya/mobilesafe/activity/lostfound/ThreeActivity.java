@@ -1,6 +1,7 @@
 package com.yiya.mobilesafe.activity.lostfound;
 
 import com.yiya.mobilesafe.R;
+import com.yiya.mobilesafe.utils.GestureActivity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,16 +11,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class ThreeActivity extends Activity {
+public class ThreeActivity extends GestureActivity {
 	EditText et_phone;
-	SharedPreferences sp;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_threelostfound);
-
-		sp = getSharedPreferences("config", MODE_PRIVATE);
 
 		et_phone = (EditText) findViewById(R.id.et_phone);
 
@@ -30,6 +28,23 @@ public class ThreeActivity extends Activity {
 
 	// next step
 	public void next(View v) {
+		next();
+	}
+
+	public void cancer(View v) {
+		previous();
+	}
+
+	@Override
+	protected void previous() {
+		Intent it = new Intent(this, TwoActivity.class);
+		startActivity(it);
+		finish();
+		overridePendingTransition(R.anim.previous_in, R.anim.previous_exit);
+	}
+
+	@Override
+	protected void next() {
 		// et_phone == null ?
 		String number = et_phone.getText().toString().trim();
 		if (number.isEmpty()) {
@@ -44,12 +59,5 @@ public class ThreeActivity extends Activity {
 			finish();
 			overridePendingTransition(R.anim.next_in, R.anim.next_exit);
 		}
-	}
-
-	public void cancer(View v) {
-		Intent it = new Intent(this, TwoActivity.class);
-		startActivity(it);
-		finish();
-		overridePendingTransition(R.anim.previous_in, R.anim.previous_exit);
 	}
 }

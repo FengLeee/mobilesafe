@@ -2,6 +2,7 @@ package com.yiya.mobilesafe.activity.lostfound;
 
 import com.yiya.mobilesafe.R;
 import com.yiya.mobilesafe.R.drawable;
+import com.yiya.mobilesafe.utils.GestureActivity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -13,8 +14,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-public class TwoActivity extends Activity {
-	SharedPreferences sp;
+public class TwoActivity extends GestureActivity {
+
 	ImageView iv_lock;
 
 	@Override
@@ -22,8 +23,6 @@ public class TwoActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_twolostfound);
 		iv_lock = (ImageView) findViewById(R.id.iv_lock);
-
-		sp = getSharedPreferences("config", MODE_PRIVATE);
 
 		// 回显
 		showLock();
@@ -60,13 +59,24 @@ public class TwoActivity extends Activity {
 	}
 
 	public void cancer(View v) {
+		previous();
+	}
+
+	public void next(View v) {
+		next();
+
+	}
+
+	@Override
+	protected void previous() {
 		Intent it = new Intent(this, OneActivity.class);
 		startActivity(it);
 		finish();
 		overridePendingTransition(R.anim.previous_in, R.anim.previous_exit);
 	}
 
-	public void next(View v) {
+	@Override
+	protected void next() {
 		boolean sim = sp.getBoolean("SIM", false);
 		// next activity
 		if (sim) {
@@ -78,7 +88,6 @@ public class TwoActivity extends Activity {
 			Toast.makeText(this, "必须要设置SIM卡号才能正常使用手机防盗功能", 0).show();
 			return;
 		}
-
 	}
 
 }

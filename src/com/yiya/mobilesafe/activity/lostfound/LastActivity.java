@@ -12,7 +12,7 @@ import android.view.View;
 import android.widget.TextView;
 
 public class LastActivity extends Activity {
-	SharedPreferences sp ;
+	SharedPreferences lsp ;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -20,17 +20,17 @@ public class LastActivity extends Activity {
 		setContentView(R.layout.activity_lastlostfound);
 		
 		TextView tv_number = (TextView) findViewById(R.id.tv_number);
-		sp = getSharedPreferences("config", MODE_PRIVATE);
-		String phonenumber = sp.getString("phonenumber", "");
-		sp.edit().putBoolean("config", true).commit();
+		lsp = getSharedPreferences("config", MODE_PRIVATE);
+		String phonenumber = lsp.getString("phonenumber", "");
+		lsp.edit().putBoolean("config", true).commit();
 		tv_number.setText(phonenumber);
 		
 	}
 	
 	public void reset(View v) {
 		Intent it = new Intent(this, OneActivity.class);
-		sp = getSharedPreferences("config", MODE_PRIVATE);
-		sp.edit().putBoolean("config", false).commit();
+		lsp = getSharedPreferences("config", MODE_PRIVATE);
+		lsp.edit().putBoolean("config", false).commit();
 		startActivity(it);
 		finish();
 	}
