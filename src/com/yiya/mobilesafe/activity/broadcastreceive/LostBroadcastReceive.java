@@ -22,6 +22,8 @@ public class LostBroadcastReceive extends BroadcastReceiver {
 				.getSystemService(context.TELEPHONY_SERVICE);
 		String simSerialNumber = manager.getSimSerialNumber();
 		
+		
+		Log.d(TAG, simid + config);
 		if(config) {
 			if(simSerialNumber.equals(simid+"88")){
 				return;
