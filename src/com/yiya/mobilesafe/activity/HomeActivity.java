@@ -1,12 +1,15 @@
 package com.yiya.mobilesafe.activity;
 
 import com.yiya.mobilesafe.R;
+import com.yiya.mobilesafe.activity.broadcastreceive.AdminReceive;
 import com.yiya.mobilesafe.activity.lostfound.LastActivity;
 import com.yiya.mobilesafe.activity.lostfound.OneActivity;
 
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.admin.DevicePolicyManager;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -29,14 +32,15 @@ public class HomeActivity extends Activity {
 	private static final String TAG = "HomeActivity";
 	GridView gv;
 	private SharedPreferences sp;
-
+	private ComponentName who;
+	private DevicePolicyManager manager;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home);
 		// 获取SP
 		sp = getSharedPreferences("config", MODE_PRIVATE);
-		ImageView iv_heima = (ImageView) findViewById(R.id.iv_heima); 
+		ImageView iv_heima = (ImageView) findViewById(R.id.iv_heima);
 		ObjectAnimator animator = ObjectAnimator.ofFloat(iv_heima, "rotationY",
 				0, 359);
 		// 实现动画效果
@@ -100,29 +104,40 @@ public class HomeActivity extends Activity {
 			}
 		});
 	}
-
-	protected void confirmPw() {
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
 		
-		//设置dialog
+		boolean b = manager.isAdminActive(who);
+		if (b) {
+			Toast.makeText(HomeActivity.this, "获取权限成功", 0).show();
+			loadResoult();
+		} else {
+			Toast.makeText(HomeActivity.this, "获取权限失败", 0).show();
+		}
+		
+	}
+	protected void confirmPw() {
+
+		// 设置dialog
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		View view = View.inflate(this, R.layout.activity_confirmpw, null);
 		builder.setView(view);
 		final AlertDialog dialog = builder.show();
-		
-		
-		//获取控件
+
+		// 获取控件
 		Button confirm = (Button) view.findViewById(R.id.confirm);
 		Button cancer = (Button) view.findViewById(R.id.cancer);
 
 		final EditText et_pw = (EditText) view.findViewById(R.id.et_pw);
-		 //确认按钮
+		// 确认按钮
 		confirm.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				// 判断密码是否正确
 				String cpw = et_pw.getText().toString();
 				String pw = sp.getString("pw", "");
-				
+
 				if (cpw.isEmpty()) {
 					Toast.makeText(getApplicationContext(), "密码不能为空,请重新输入", 0)
 							.show();
@@ -131,16 +146,33 @@ public class HomeActivity extends Activity {
 						// 密码正确.进入界面,判断是否已经设置防盗,设置了直接进入最后界面,没设置重头开始设置
 						Log.d(TAG, "进入界面设置");
 						boolean config = sp.getBoolean("config", false);
-						if(config) {
-							//进入最后
+						if (config) {
+							// 进入最后
 							dialog.dismiss();
-							loadResoult();
-						}else {
-							//进入设置
+							 manager = (DevicePolicyManager) getSystemService(DEVICE_POLICY_SERVICE);
+							 who = new ComponentName(
+									HomeActivity.this, AdminReceive.class);
+							boolean b = manager.isAdminActive(who);
+							if (b) {
+								loadResoult();
+							} else {
+								Intent intent = new Intent(
+										DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
+								intent.putExtra(
+										DevicePolicyManager.EXTRA_DEVICE_ADMIN,
+										who);
+								intent.putExtra(
+										DevicePolicyManager.EXTRA_ADD_EXPLANATION,
+										"要获取系统权限才能使用此功能");
+								startActivityForResult(intent, 0);
+							}
+
+						} else {
+							// 进入设置
 							dialog.dismiss();
 							lostFoundSetting();
 						}
-						
+
 					} else {
 						Toast.makeText(getApplicationContext(), "密码错误,请重新输入", 0)
 								.show();
@@ -148,22 +180,23 @@ public class HomeActivity extends Activity {
 				}
 			}
 		});
-		
-		
+
 		cancer.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				dialog.dismiss();
 			}
 		});
-		
+
 	}
 
 	protected void lostFoundSetting() {
-		//进入第一个防盗页面
+		// 进入第一个防盗页面
+
 		Intent it = new Intent(this, OneActivity.class);
 		startActivity(it);
+
 	}
 
 	protected void loadResoult() {
@@ -179,7 +212,8 @@ public class HomeActivity extends Activity {
 		final AlertDialog dialog = setPw.show();
 
 		final EditText et_pw = (EditText) v.findViewById(R.id.et_pw);
-		final EditText et_pw_confirm = (EditText) v.findViewById(R.id.et_pw_confirm);
+		final EditText et_pw_confirm = (EditText) v
+				.findViewById(R.id.et_pw_confirm);
 
 		Button confirm = (Button) v.findViewById(R.id.confirm);
 		Button cancer = (Button) v.findViewById(R.id.cancer);
@@ -188,9 +222,9 @@ public class HomeActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				
-				 String spw = et_pw.getText().toString();
-				 String spwc = et_pw_confirm.getText().toString();
+
+				String spw = et_pw.getText().toString();
+				String spwc = et_pw_confirm.getText().toString();
 				if (spw.equals(spwc)) {
 					if (spw.isEmpty()) {
 						Toast.makeText(getApplicationContext(), "密码不能为空,请重新输入",
@@ -201,7 +235,7 @@ public class HomeActivity extends Activity {
 						Editor edit = sp.edit();
 						edit.putString("pw", spw);
 						edit.commit();
-						
+
 						Toast.makeText(getApplicationContext(), "密码设置成功", 0)
 								.show();
 						// 进入确认密码界面
