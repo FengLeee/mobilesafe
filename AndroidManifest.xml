@@ -42,6 +42,8 @@
         </activity>
         <activity android:name="com.yiya.mobilesafe.activity.lostfound.LastActivity" >
         </activity>
+        <activity android:name="com.yiya.mobilesafe.utils.GetAdmin" >
+        </activity>
         <!-- bootcompleted broadcastreceive -->
         <receiver android:name="com.yiya.mobilesafe.activity.broadcastreceive.LostBroadcastReceive" >
             <intent-filter>

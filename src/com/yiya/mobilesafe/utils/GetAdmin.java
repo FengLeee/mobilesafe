@@ -15,17 +15,19 @@ public class GetAdmin extends Activity {
 	private static final String TAG = "GetAdmin";
 	public ComponentName who;
 	public DevicePolicyManager manager;
-	public SharedPreferences s;
+	public SharedPreferences sp;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		s = getSharedPreferences("config", MODE_PRIVATE);
+		sp = getSharedPreferences("config", MODE_PRIVATE);
 		manager = (DevicePolicyManager) getSystemService(DEVICE_POLICY_SERVICE);
+		who = new ComponentName(this, AdminReceive.class);
+		adminStatues();
 	}
 
-	public void adminStatues(Context context) {
-		who = new ComponentName(context, AdminReceive.class);
+	public void adminStatues() {
+		
 		boolean b = manager.isAdminActive(who);
 		if (b) {
 			 
@@ -45,8 +47,8 @@ public class GetAdmin extends Activity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		s = getSharedPreferences("config", MODE_PRIVATE);
+		sp = getSharedPreferences("config", MODE_PRIVATE);
 		boolean b = manager.isAdminActive(who);
-		s.edit().putBoolean("admin", b).commit();
+		sp.edit().putBoolean("admin", b).commit();
 	}
 }

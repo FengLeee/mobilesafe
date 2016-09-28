@@ -71,12 +71,14 @@ public class OneActivity extends GestureActivity {
 					dialog.dismiss();
 				} else {
 
-					Intent intent = new Intent(
+					/*Intent intent = new Intent(
 							DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
 					intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, who);
 					intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION,
 							"要获取系统权限才能使用此功能");
-					startActivityForResult(intent, 0);
+					startActivityForResult(intent, 0);*/
+					Intent it = new Intent(OneActivity.this, GetAdmin.class);
+					startActivity(it);
 
 				}
 			}
