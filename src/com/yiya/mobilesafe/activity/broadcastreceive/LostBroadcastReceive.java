@@ -30,7 +30,7 @@ public class LostBroadcastReceive extends BroadcastReceiver {
 			}else {
 				//send mes to safe number;
 				android.telephony.SmsManager default1 = android.telephony.SmsManager.getDefault();
-				default1.sendTextMessage(sp.getString("phonenumber", ""), null, "phone lost", null, null);
+				default1.sendTextMessage(sp.getString("phonenumber", ""), null, "you phone may had lost", null, null);
 				Log.d(TAG, "send mes====="+sp.getString("phonenumber", ""));
 			}
 		}else {

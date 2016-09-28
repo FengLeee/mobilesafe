@@ -5,5 +5,7 @@
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="ip">http://192.168.0.36:8080/json.txt</string>
+    <string name="sample_device_admin_description">获取系统权限模板代码描述</string>
+    <string name="sample_device_admin">获取系统权限模板代码</string>
 
 </resources>
