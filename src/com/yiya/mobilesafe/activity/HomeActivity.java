@@ -2,6 +2,7 @@ package com.yiya.mobilesafe.activity;
 
 import com.yiya.mobilesafe.R;
 import com.yiya.mobilesafe.activity.broadcastreceive.AdminReceive;
+import com.yiya.mobilesafe.activity.defend.DefendActivity;
 import com.yiya.mobilesafe.activity.lostfound.LastActivity;
 import com.yiya.mobilesafe.activity.lostfound.OneActivity;
 
@@ -74,7 +75,9 @@ public class HomeActivity extends Activity {
 
 					break;
 				case 1:
-
+					// start defend activity
+					Intent it = new Intent(HomeActivity.this, DefendActivity.class);
+					startActivity(it);
 					break;
 				case 2:
 
