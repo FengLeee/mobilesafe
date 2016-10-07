@@ -11,7 +11,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 public class DefendDb {
-	ArrayList<BlackPerson> list;
+
 	DefendSQLiteOpenHelper helper;
 
 	public DefendDb(Context context) {
@@ -69,26 +69,30 @@ public class DefendDb {
 		Cursor cursor = database.query("bn", new String[] { "mode" },
 				"number = ?", new String[] { number }, null, null, null);
 		database.close();
-		if(cursor.moveToNext()) {
+		if (cursor.moveToNext()) {
 			int i = cursor.getInt(0);
 			return i;
-		}else {
+		} else {
 			return -1;
 		}
 	}
-	//findall database
+
+	// findall database
 	public ArrayList<BlackPerson> findAll() {
+		ArrayList<BlackPerson> list = new ArrayList<BlackPerson>();
 		SQLiteDatabase database = helper.getWritableDatabase();
-		Cursor cursor = database.query("bn", null, null, null, null, null, null);
-		if(cursor.moveToNext()) {
-			String number = cursor.getString(0);
-			String name = cursor.getString(1);
-			int mode = cursor.getInt(2);
+		Cursor cursor = database
+				.query("bn", null, null, null, null, null, null);
+		// while 循环
+		while (cursor.moveToNext()) {
+			String number = cursor.getString(1);
+			String name = cursor.getString(2);
+			int mode = cursor.getInt(3);
 			BlackPerson p = new BlackPerson(number, name, mode);
 			list.add(p);
 		}
+		cursor.close();
 		database.close();
 		return list;
-		
 	}
 }
