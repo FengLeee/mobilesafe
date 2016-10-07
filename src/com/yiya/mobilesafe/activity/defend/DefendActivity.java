@@ -92,7 +92,7 @@ public class DefendActivity extends Activity {
 				@Override
 				public void onClick(View v) {
 					AlertDialog.Builder builder = new AlertDialog.Builder(DefendActivity.this);
-					//builder.setPositiveButton(text, listener);
+					
 				}
 			});
 			
