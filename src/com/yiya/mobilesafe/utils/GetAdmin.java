@@ -1,6 +1,7 @@
 package com.yiya.mobilesafe.utils;
 
 import com.yiya.mobilesafe.activity.broadcastreceive.AdminReceive;
+import com.yiya.mobilesafe.activity.lostfound.OneActivity;
 
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
@@ -10,8 +11,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
-public class GetAdmin extends Activity {
+public class GetAdmin extends OneActivity {
 	private static final String TAG = "GetAdmin";
 	public ComponentName who;
 	public DevicePolicyManager manager;
@@ -27,10 +29,10 @@ public class GetAdmin extends Activity {
 	}
 
 	public void adminStatues() {
-		
+
 		boolean b = manager.isAdminActive(who);
 		if (b) {
-			 
+
 		} else {
 			// 激活admin
 			Log.d(TAG, "激活admin");
@@ -39,7 +41,8 @@ public class GetAdmin extends Activity {
 			intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, who);
 			intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION,
 					"要获取系统权限才能使用此功能");
-			startActivity(intent);
+			startActivityForResult(intent, 0);
+			finish();
 		}
 
 	}
@@ -50,5 +53,6 @@ public class GetAdmin extends Activity {
 		sp = getSharedPreferences("config", MODE_PRIVATE);
 		boolean b = manager.isAdminActive(who);
 		sp.edit().putBoolean("admin", b).commit();
+		
 	}
 }

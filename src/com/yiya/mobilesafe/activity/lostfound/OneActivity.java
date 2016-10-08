@@ -57,7 +57,7 @@ public class OneActivity extends GestureActivity {
 		}
 	}
 
-	private void getAdmin() {
+	public void getAdmin() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle("获取系统管理员权限");
 		builder.setMessage("获取到管理员权限,手机防盗功能才能正常工作");
@@ -69,6 +69,7 @@ public class OneActivity extends GestureActivity {
 				if (b) {
 					Toast.makeText(OneActivity.this, "获取权限成功", 0).show();
 					dialog.dismiss();
+					
 				} else {
 
 					/*Intent intent = new Intent(

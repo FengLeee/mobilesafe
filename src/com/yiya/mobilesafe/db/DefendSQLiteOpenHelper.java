@@ -13,7 +13,7 @@ public class DefendSQLiteOpenHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		String table = "create table bn (_id integer primary key autoincrement, number varchar(20),name varchar(20), mode int(1) )";
+		String table = "create table bn (_id integer primary key autoincrement, number varchar(20), name varchar(20), mode int(1))";
 		db.execSQL(table);
 	}
 
