@@ -24,15 +24,16 @@ public class OneActivity extends GestureActivity {
 	public ComponentName who;
 	public DevicePolicyManager manager;
 	boolean b;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_onelostfound);
 		who = new ComponentName(OneActivity.this, AdminReceive.class);
 		manager = (DevicePolicyManager) getSystemService(DEVICE_POLICY_SERVICE);
-		
+
 		b = manager.isAdminActive(who);
-		if(!b) {
+		if (!b) {
 			getAdmin();
 		}
 
@@ -46,7 +47,6 @@ public class OneActivity extends GestureActivity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-	
 		boolean b = manager.isAdminActive(who);
 		sp.edit().putBoolean("admin", b);
 		if (b) {
@@ -69,15 +69,17 @@ public class OneActivity extends GestureActivity {
 				if (b) {
 					Toast.makeText(OneActivity.this, "获取权限成功", 0).show();
 					dialog.dismiss();
-					
+
 				} else {
 
-					/*Intent intent = new Intent(
-							DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
-					intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, who);
-					intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION,
-							"要获取系统权限才能使用此功能");
-					startActivityForResult(intent, 0);*/
+					/*
+					 * Intent intent = new Intent(
+					 * DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
+					 * intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN,
+					 * who);
+					 * intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION
+					 * , "要获取系统权限才能使用此功能"); startActivityForResult(intent, 0);
+					 */
 					Intent it = new Intent(OneActivity.this, GetAdmin.class);
 					startActivity(it);
 
@@ -111,6 +113,7 @@ public class OneActivity extends GestureActivity {
 
 	@Override
 	protected void next() {
+		// if get Admin
 		Intent it = new Intent(this, TwoActivity.class);
 		startActivity(it);
 		finish();

@@ -13,7 +13,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
-public class GetAdmin extends OneActivity {
+public class GetAdmin extends Activity {
 	private static final String TAG = "GetAdmin";
 	public ComponentName who;
 	public DevicePolicyManager manager;

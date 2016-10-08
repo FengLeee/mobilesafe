@@ -117,6 +117,7 @@ public class HomeActivity extends Activity {
 			loadResoult();
 		} else {
 			Toast.makeText(HomeActivity.this, "获取权限失败", 0).show();
+			//finish();
 		}
 		
 	}
@@ -173,6 +174,8 @@ public class HomeActivity extends Activity {
 						} else {
 							// 进入设置
 							dialog.dismiss();
+							
+							
 							lostFoundSetting();
 						}
 

@@ -8,7 +8,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -51,15 +50,10 @@ public class DefendActivity extends Activity {
 	}
 
 	public void defendAdd(View v) {
-		//boolean b = db.insert("号码", "姓名", 9);
-		for (int i = 0; i < 15; i++) {
-			db.insert("号码"+i, "姓名", 9);
-			list.add(new BlackPerson("号码"+i, "姓名", 9));
-		}
-		//Toast.makeText(this, "add=====" + b, 0).show();
+		boolean b = db.insert("号码", "姓名", 9);
 		// refresh adapter
-		if (true) {
-			//list.add(new BlackPerson("号码", "姓名", 9));
+		if (b) {
+			list.add(new BlackPerson("号码", "姓名", 9));
 			adapter.notifyDataSetChanged();
 		} else {
 			Toast.makeText(this, "add=====" + false, 0).show();
@@ -67,9 +61,10 @@ public class DefendActivity extends Activity {
 	}
 
 	static class viewHolder {
-		static TextView mode;
-		static TextView name;
-		static TextView number;
+		TextView mode;
+		TextView name;
+		TextView number;
+		ImageButton ib_defend;
 	}
 
 	public class MyAdapter extends BaseAdapter {
@@ -87,16 +82,16 @@ public class DefendActivity extends Activity {
 				view = View.inflate(getApplicationContext(),
 						R.layout.defenfitems, null);
 				holder = new viewHolder();
-				holder.mode = (TextView) view
-						.findViewById(R.id.tv_defend_mode);
-				holder.name = (TextView) view
-						.findViewById(R.id.tv_defend_name);
+				holder.mode = (TextView) view.findViewById(R.id.tv_defend_mode);
+				holder.name = (TextView) view.findViewById(R.id.tv_defend_name);
 				holder.number = (TextView) view
 						.findViewById(R.id.tv_defend_number);
+				holder.ib_defend = (ImageButton) view
+						.findViewById(R.id.ib_defend);
 				view.setTag(holder);
 			} else {
 				view = convertView;
-				 holder = (com.yiya.mobilesafe.activity.defend.DefendActivity.viewHolder) convertView
+				holder = (com.yiya.mobilesafe.activity.defend.DefendActivity.viewHolder) convertView
 						.getTag();
 			}
 			person = list.get(position);
@@ -107,10 +102,7 @@ public class DefendActivity extends Activity {
 
 			holder.mode.setText("" + person.getMode());
 			// set delete method
-			ImageButton ib_defend = (ImageButton) view
-					.findViewById(R.id.ib_defend);
-
-			ib_defend.setOnClickListener(new OnClickListener() {
+			holder.ib_defend.setOnClickListener(new OnClickListener() {
 
 				@Override
 				public void onClick(View v) {
