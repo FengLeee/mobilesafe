@@ -25,11 +25,42 @@
             android:src="@drawable/ic_menu_add_normal" />
     </RelativeLayout>
 
-    <ListView
-        android:fastScrollEnabled="true"
-        android:id="@+id/defend_number"
+    <FrameLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
-    </ListView>
+        android:layout_height="fill_parent" >
+
+        <ImageView
+            android:id="@+id/iv_empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/empty" />
+
+        <RelativeLayout
+            android:id="@+id/rl_bar"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center" >
+
+            <ProgressBar
+                android:id="@+id/pr_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tv_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/pr_bar"
+                android:text="正在加载" />
+        </RelativeLayout>
+
+        <ListView
+            android:id="@+id/defend_number"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:fastScrollEnabled="true" >
+        </ListView>
+    </FrameLayout>
 
 </LinearLayout>

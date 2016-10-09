@@ -8,12 +8,16 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,12 +28,19 @@ public class DefendActivity extends Activity {
 	DefendDb db;
 	MyAdapter adapter;
 	BlackPerson person;
+	ImageView iv_empty;
+	TextView tv_bar;
+	ProgressBar pr_bar;
+	RelativeLayout rl_bar;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_defend);
 		defend_number = (ListView) findViewById(R.id.defend_number);
+		iv_empty = (ImageView) findViewById(R.id.iv_empty);
+		rl_bar = (RelativeLayout) findViewById(R.id.rl_bar);
+		iv_empty.setVisibility(ImageView.INVISIBLE);
 		db = new DefendDb(this);
 		findAllData();
 	}
@@ -37,10 +48,13 @@ public class DefendActivity extends Activity {
 	private void findAllData() {
 		new Thread() {
 			public void run() {
+				SystemClock.sleep(1000);
 				list = db.findAll();
 				runOnUiThread(new Runnable() {
 					@Override
 					public void run() {
+						// pro _bar always can see ,untile adapter get view
+						rl_bar.setVisibility(RelativeLayout.INVISIBLE);
 						adapter = new MyAdapter();
 						defend_number.setAdapter(adapter);
 					}
@@ -71,7 +85,14 @@ public class DefendActivity extends Activity {
 
 		@Override
 		public int getCount() {
-			return list.size();
+			if (list.size() == 0) {
+				iv_empty.setVisibility(ImageView.VISIBLE);
+				return 0;
+			} else {
+				iv_empty.setVisibility(ImageView.INVISIBLE);
+				return list.size();
+			}
+
 		}
 
 		@Override
@@ -99,8 +120,23 @@ public class DefendActivity extends Activity {
 			holder.number.setText(person.getNumber());
 
 			holder.name.setText(person.getName());
+			switch (person.getMode()) {
+			case 1:
+				holder.mode.setText("拦截电话");
+				break;
+			case 2:
+				holder.mode.setText("拦截短信");
+				break;
+			case 3:
+				holder.mode.setText("拦截电话+短信");
+				break;
 
-			holder.mode.setText("" + person.getMode());
+			default:
+				holder.mode.setText("模式出错");
+				break;
+			}
+
+			
 			// set delete method
 			holder.ib_defend.setOnClickListener(new OnClickListener() {
 
