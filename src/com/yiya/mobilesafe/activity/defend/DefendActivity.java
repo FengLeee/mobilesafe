@@ -7,6 +7,7 @@ import com.yiya.mobilesafe.db.DefendDb;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
@@ -62,16 +63,18 @@ public class DefendActivity extends Activity {
 			};
 		}.start();
 	}
-
+	
 	public void defendAdd(View v) {
-		boolean b = db.insert("号码", "姓名", 9);
+		/*boolean b = db.insert("号码", "姓名", 9);
 		// refresh adapter
 		if (b) {
 			list.add(new BlackPerson("号码", "姓名", 9));
 			adapter.notifyDataSetChanged();
 		} else {
 			Toast.makeText(this, "add=====" + false, 0).show();
-		}
+		}*/
+		Intent it = new Intent(this, AddBlackNumberActivity.class);
+		startActivityForResult(it, 0);
 	}
 
 	static class viewHolder {

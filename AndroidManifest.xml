@@ -53,6 +53,8 @@
         </activity>
         <activity android:name="com.yiya.mobilesafe.activity.defend.DefendActivity" >
         </activity>
+        <activity android:name="com.yiya.mobilesafe.activity.defend.AddBlackNumberActivity" >
+        </activity>
         <!-- bootcompleted broadcastreceive -->
         <receiver android:name="com.yiya.mobilesafe.activity.broadcastreceive.LostBroadcastReceive" >
             <intent-filter>

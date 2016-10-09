@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="添加黑名单"
+        android:textSize="18dp" />
+
+    <LinearLayout
+        android:padding="10dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="添加电话号码"
+            android:textSize="18dp" />
+
+        <EditText
+            android:id="@+id/et_number"
+            android:background="@drawable/et_numberselector"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="黑名单号码" />
+        <EditText
+            android:background="@drawable/et_numberselector"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="黑名单号码" />
+    </LinearLayout>
+
+</LinearLayout>
