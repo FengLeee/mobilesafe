@@ -63,18 +63,34 @@ public class DefendActivity extends Activity {
 			};
 		}.start();
 	}
-	
+
 	public void defendAdd(View v) {
-		/*boolean b = db.insert("号码", "姓名", 9);
-		// refresh adapter
-		if (b) {
-			list.add(new BlackPerson("号码", "姓名", 9));
-			adapter.notifyDataSetChanged();
-		} else {
-			Toast.makeText(this, "add=====" + false, 0).show();
-		}*/
+		/*
+		 * boolean b = db.insert("号码", "姓名", 9); // refresh adapter if (b) {
+		 * list.add(new BlackPerson("号码", "姓名", 9));
+		 * adapter.notifyDataSetChanged(); } else { Toast.makeText(this,
+		 * "add=====" + false, 0).show(); }
+		 */
 		Intent it = new Intent(this, AddBlackNumberActivity.class);
 		startActivityForResult(it, 0);
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (data != null) {
+			String number = data.getStringExtra("number");
+			String name = data.getStringExtra("name");
+			int mode = data.getIntExtra("mode", 0);
+			Toast.makeText(getApplicationContext(), "mode==="+mode, 0)
+			.show();
+			BlackPerson b = new BlackPerson(number, name, mode);
+			list.add(b);
+			adapter.notifyDataSetChanged();
+		} else {
+
+		}
+
 	}
 
 	static class viewHolder {
@@ -131,7 +147,7 @@ public class DefendActivity extends Activity {
 				holder.mode.setText("拦截短信");
 				break;
 			case 3:
-				holder.mode.setText("拦截电话+短信");
+				holder.mode.setText("全部拦截");
 				break;
 
 			default:
@@ -139,7 +155,6 @@ public class DefendActivity extends Activity {
 				break;
 			}
 
-			
 			// set delete method
 			holder.ib_defend.setOnClickListener(new OnClickListener() {
 

@@ -35,6 +35,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+         android:onClick="defendServiceStatus"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/setting_mid_selector"
@@ -44,13 +45,14 @@
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="xxxxx" />
+            android:text="是否开启骚扰拦截服务" />
 
-        <ImageView
+        <com.yiya.mobilesafe.ui.SwitchImageView
+            android:id="@+id/iv_defend"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:src="@drawable/off" />
+            android:src="@drawable/on" />
     </RelativeLayout>
 
     <RelativeLayout
