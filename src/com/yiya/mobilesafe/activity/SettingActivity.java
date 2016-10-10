@@ -29,11 +29,13 @@ public class SettingActivity extends Activity {
 		iv_defend = (SwitchImageView) findViewById(R.id.iv_defend);
 		sp = getSharedPreferences("config", MODE_PRIVATE);
 		b = sp.getBoolean("status", true);
+		
 		serviceStatues = GetServiceStatues.getStatues(this,
 				"com.yiya.mobilesafe.activity.services.BlackNumberService");
+		
 		iv_update.setStatus(b);
 		iv_defend.setStatus(serviceStatues);
-
+		Log.d(TAG, "serviceStatues====="+serviceStatues);
 		if (b) {
 			iv_update.setImageResource(R.drawable.on);
 		} else {
@@ -56,14 +58,14 @@ public class SettingActivity extends Activity {
 		edit.commit();
 	}
 
-	Intent service = new Intent(this, BlackNumberService.class);
+	
 
 	// 骚扰任务是否开启
 	public void defendServiceStatus(View v) {
+		Intent service = new Intent(this, BlackNumberService.class);
 		boolean changeValues = iv_defend.switchStatus();
 		// 要获取状态进行保存
 		if (changeValues) {
-
 			startService(service);
 		} else {
 			stopService(service);

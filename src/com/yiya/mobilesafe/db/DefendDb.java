@@ -65,16 +65,17 @@ public class DefendDb {
 
 	// find
 	public int find(String number) {
+		int i = -1;
 		SQLiteDatabase database = helper.getWritableDatabase();
 		Cursor cursor = database.query("bn", new String[] { "mode" },
 				"number = ?", new String[] { number }, null, null, null);
-		database.close();
 		if (cursor.moveToNext()) {
-			int i = cursor.getInt(0);
-			return i;
-		} else {
-			return -1;
+			i = cursor.getInt(0);
 		}
+		database.close();
+		cursor.close();
+		return i;
+
 	}
 
 	// findall database
