@@ -7,8 +7,11 @@ import com.android.internal.telephony.ITelephony;
 import com.yiya.mobilesafe.db.DefendDb;
 
 import android.app.Service;
+import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Handler;
@@ -18,9 +21,11 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 
 public class BlackNumberService extends Service {
-
 	private static final String TAG = "BlackNumberService";
 	DefendDb db;
+	MyListen listener;
+	MySmsReceive receiver;
+	TelephonyManager tm;
 
 	@Override
 	public IBinder onBind(Intent intent) {
@@ -33,34 +38,55 @@ public class BlackNumberService extends Service {
 		db = new DefendDb(this);
 		Log.d(TAG, "开启服务");
 		// 监听来电
-		TelephonyManager tm = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
+		tm = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
 
-		tm.listen(new PhoneStateListener() {
-			@Override
-			public void onCallStateChanged(int state, String incomingNumber) {
-				super.onCallStateChanged(state, incomingNumber);
-				switch (state) {
-				case TelephonyManager.CALL_STATE_IDLE:
+		listener = new MyListen();
+		tm.listen(listener, PhoneStateListener.LISTEN_CALL_STATE);
 
-					break;
-				case TelephonyManager.CALL_STATE_RINGING:
-					// 挂断电话
-					int i = db.find(incomingNumber);
-					if (i == 1 || i == 3) {
-						endCalll(incomingNumber);
-					}
-					Log.d(TAG, "int i ====" + i);
-					break;
-				case TelephonyManager.CALL_STATE_OFFHOOK:
+		// 使用代码注册广播监听器
+		IntentFilter filter = new IntentFilter();
+		filter.addAction("android.provider.Telephony.SMS_RECEIVED");
+		filter.setPriority(IntentFilter.SYSTEM_HIGH_PRIORITY);
 
-					break;
+		receiver = new MySmsReceive();
+		registerReceiver(receiver, filter);
+	}
 
-				default:
-					break;
+	class MyListen extends PhoneStateListener {
+
+		@Override
+		public void onCallStateChanged(int state, String incomingNumber) {
+			super.onCallStateChanged(state, incomingNumber);
+			switch (state) {
+			case TelephonyManager.CALL_STATE_IDLE:
+
+				break;
+			case TelephonyManager.CALL_STATE_RINGING:
+				// 挂断电话
+				int i = db.find(incomingNumber);
+				if (i == 1 || i == 3) {
+					endCalll(incomingNumber);
 				}
+				Log.d(TAG, "int i ====" + i);
+				break;
+			case TelephonyManager.CALL_STATE_OFFHOOK:
 
+				break;
+
+			default:
+				break;
 			}
-		}, PhoneStateListener.LISTEN_CALL_STATE);
+		}
+
+	}
+
+	class MySmsReceive extends BroadcastReceiver {
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			Log.d(TAG, "Action=====" + intent.getAction());
+			Log.d(TAG, "拦截短信");
+		}
 
 	}
 
@@ -101,6 +127,11 @@ public class BlackNumberService extends Service {
 	public void onDestroy() {
 		super.onDestroy();
 		Log.d(TAG, "关闭服务");
+		tm.listen(listener, PhoneStateListener.LISTEN_NONE);
+		listener = null;
+		
+		unregisterReceiver(receiver);
+		receiver = null;
 	}
 
 }
