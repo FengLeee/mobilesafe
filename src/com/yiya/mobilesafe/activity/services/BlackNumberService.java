@@ -14,9 +14,11 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.ContentObserver;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.telephony.PhoneStateListener;
+import android.telephony.SmsMessage;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
@@ -86,6 +88,20 @@ public class BlackNumberService extends Service {
 		public void onReceive(Context context, Intent intent) {
 			Log.d(TAG, "Action=====" + intent.getAction());
 			Log.d(TAG, "拦截短信");
+			//获取到发送短信的号码,判断是不知在模式二和三
+			Bundle bundle = intent.getExtras();
+			Object[] object = (Object[]) bundle.get("pdus");
+			String address = "";
+			for (Object object2 : object) {
+				SmsMessage smsMessage = SmsMessage.createFromPdu((byte[]) object2);
+				address = smsMessage.getOriginatingAddress();
+				Log.d(TAG, "address==="+address);
+			}
+			int i = db.find(address);
+			if(i==2||i==3) {
+				//setResultData("");
+				abortBroadcast();
+			}
 		}
 
 	}
