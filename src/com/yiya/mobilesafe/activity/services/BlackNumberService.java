@@ -28,7 +28,6 @@ public class BlackNumberService extends Service {
 	MyListen listener;
 	MySmsReceive receiver;
 	TelephonyManager tm;
-
 	@Override
 	public IBinder onBind(Intent intent) {
 		return null;
@@ -114,7 +113,7 @@ public class BlackNumberService extends Service {
 			Method method = clazz.getMethod("getService", String.class);
 			IBinder ibinder = (IBinder) method.invoke(null, TELEPHONY_SERVICE);
 			// ITelephony.Stub.asInterface()需要Ibinder对象,
-			// 而ServiceManager.getService返回的就是Ibinder对象
+			// 而ServiceManager.getService返回的就是Ibinder对象,代理
 			// 然后通过这个方法把Ibinder对象转换为父类.这样就可以调用父类接口的方法,而这个方法就在远程service里面
 			ITelephony iTelephony = ITelephony.Stub.asInterface(ibinder);
 			iTelephony.endCall();

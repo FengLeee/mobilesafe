@@ -1,11 +1,5 @@
 package com.yiya.mobilesafe.activity;
 
-import com.yiya.mobilesafe.R;
-import com.yiya.mobilesafe.activity.broadcastreceive.AdminReceive;
-import com.yiya.mobilesafe.activity.defend.DefendActivity;
-import com.yiya.mobilesafe.activity.lostfound.LastActivity;
-import com.yiya.mobilesafe.activity.lostfound.OneActivity;
-
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -28,6 +22,12 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.yiya.mobilesafe.R;
+import com.yiya.mobilesafe.activity.broadcastreceive.AdminReceive;
+import com.yiya.mobilesafe.activity.defend.DefendActivity;
+import com.yiya.mobilesafe.activity.lostfound.LastActivity;
+import com.yiya.mobilesafe.activity.lostfound.OneActivity;
 
 public class HomeActivity extends Activity {
 	private static final String TAG = "HomeActivity";
@@ -54,6 +54,8 @@ public class HomeActivity extends Activity {
 		showHome();
 		// 设置gridvie监听器
 		setOnItemClickListener();
+		
+		
 	}
 
 	private void setOnItemClickListener() {

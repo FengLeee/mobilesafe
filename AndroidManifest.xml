@@ -10,7 +10,7 @@
     </instrumentation>
 
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="11"
         android:targetSdkVersion="17" />
 
     <uses-permission android:name="android.permission.WRITE_CALL_LOG" />
@@ -86,6 +86,7 @@
 
         <service android:name="com.yiya.mobilesafe.activity.services.BlackNumberService" >
         </service>
+        
     </application>
 
 </manifest>
